@@ -17,13 +17,33 @@ class SiswaResource extends Resource
 {
     protected static ?string $model = Siswa::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationLabel = 'Siswa';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama')
+                    ->required()
+                    ->maxLength(50),
+                Forms\Components\TextInput::make('nis')
+                    ->required()
+                    ->maxLength(5),
+                Forms\Components\TextInput::make('gender')
+                    ->required(),
+                Forms\Components\Textarea::make('alamat')
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('kontak')
+                    ->required()
+                    ->maxLength(16),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(30),
+                Forms\Components\Toggle::make('status_lapor_pkl')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +51,25 @@ class SiswaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('nis')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('gender'),
+                Tables\Columns\TextColumn::make('kontak')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('status_lapor_pkl')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -61,4 +99,4 @@ class SiswaResource extends Resource
             'edit' => Pages\EditSiswa::route('/{record}/edit'),
         ];
     }
-}
+}   

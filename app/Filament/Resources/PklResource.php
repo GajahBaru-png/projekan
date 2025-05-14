@@ -18,12 +18,25 @@ class PklResource extends Resource
     protected static ?string $model = Pkl::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+    protected static ?string $navigationLabel = 'Siswa PKL';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('siswa_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('industri_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('guru_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\DatePicker::make('mulai')
+                    ->required(),
+                Forms\Components\DatePicker::make('selesai')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +44,29 @@ class PklResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('siswa_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('industri_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('guru_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('mulai')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('selesai')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

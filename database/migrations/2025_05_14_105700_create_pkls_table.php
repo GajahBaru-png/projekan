@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pkls', function (Blueprint $table) {
             $table->id();
+            // Pastikan tipe data foreign key sesuai dengan tipe data di tabel yang di-referensikan
             $table->foreignId('siswa_id')->constrained('siswas')->onDelete('restrict');
             $table->foreignId('industri_id')->constrained('industris')->onDelete('restrict');
             $table->foreignId('guru_id')->constrained('gurus')->onDelete('restrict');

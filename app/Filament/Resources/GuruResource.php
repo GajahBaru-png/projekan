@@ -18,12 +18,36 @@ class GuruResource extends Resource
     protected static ?string $model = Guru::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationLabel = 'Guru';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama')
+                    ->required()
+                    ->maxLength(50),
+                Forms\Components\TextInput::make('nip')
+                    ->required()
+                    ->maxLength(18),
+                Forms\Components\Select::make('gender')
+                    ->required()
+                    ->label('Jenis Kelamin')
+                    ->options([
+                        'pria' => 'Pria',
+                        'wanita' => 'Wanita',
+                    ]),
+                Forms\Components\Textarea::make('alamat')
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('kontak')
+                    ->required()
+                    ->maxLength(16)
+                    ->numeric(),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(30),
             ]);
     }
 
@@ -31,7 +55,23 @@ class GuruResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('nip')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('gender'),
+                Tables\Columns\TextColumn::make('kontak')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
