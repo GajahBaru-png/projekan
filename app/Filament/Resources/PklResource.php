@@ -19,6 +19,7 @@ class PklResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
     protected static ?string $navigationLabel = 'Siswa PKL';
+    protected static ?string $navigationGroup = 'Sekolah';
 
     public static function form(Form $form): Form
     {

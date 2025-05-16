@@ -19,6 +19,7 @@ class IndustriResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
     protected static ?string $navigationLabel = 'Industri';
+    protected static ?string $navigationGroup = 'Sekolah';
 
     public static function form(Form $form): Form
     {

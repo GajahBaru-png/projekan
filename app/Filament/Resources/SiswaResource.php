@@ -19,6 +19,7 @@ class SiswaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationLabel = 'Siswa';
+    protected static ?string $navigationGroup = 'Sekolah';
 
     public static function form(Form $form): Form
     {
